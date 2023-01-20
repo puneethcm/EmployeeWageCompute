@@ -10,7 +10,9 @@ namespace EmployeeWageCompute
     {
         private static void Main(string[] args)
         {
-            int isPresent = 1;
+            const int isPresent = 1;
+            const int empRatePerHour = 20;
+            int empHour = 0, empWage=0;
             Console.WriteLine("Welcome to Employee Wage Computation");
 
             //UC1- EmployeeAttendence
@@ -18,12 +20,14 @@ namespace EmployeeWageCompute
             int empAttendence = random.Next(0, 2);
             if (empAttendence == isPresent)
             {
-                Console.WriteLine("Employee is Present");
+                empHour = 8;
             }
             else
             {
-                Console.WriteLine("Employee is Absent");
+                empHour = 0;
             }
+            empWage = empHour * empRatePerHour;
+            Console.WriteLine("Employee Wage: " + empWage);
             Console.ReadLine();
         }
     }
