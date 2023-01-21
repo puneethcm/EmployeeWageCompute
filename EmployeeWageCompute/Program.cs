@@ -10,24 +10,27 @@ namespace EmployeeWageCompute
     {
         private static void Main(string[] args)
         {
-            const int isPresent = 1;
-            const int empRatePerHour = 20;
+            const int FULL_TIME = 1;
+            const int EMP_RATE_PER_HR = 20;
             int empHour = 0, empWage=0;
             Console.WriteLine("Welcome to Employee Wage Computation");
 
-            //UC1- EmployeeAttendence
+            //UC2-Daily wages
             Random random = new Random();
             int empAttendence = random.Next(0, 2);
-            if (empAttendence == isPresent)
+            if (empAttendence == FULL_TIME)
             {
+                Console.WriteLine("Employee is Present");
                 empHour = 8;
             }
             else
             {
+                Console.WriteLine("Employee is Absent");
                 empHour = 0;
             }
-            empWage = empHour * empRatePerHour;
-            Console.WriteLine("Employee Wage: " + empWage);
+            empWage = empHour * EMP_RATE_PER_HR;
+            //Console.WriteLine("Employee Wage: " + empWage);
+            Console.WriteLine("Employee Wage {0}", empWage);
             Console.ReadLine();
         }
     }
