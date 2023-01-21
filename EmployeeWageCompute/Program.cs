@@ -10,44 +10,45 @@ namespace EmployeeWageCompute
     {
         private static void Main(string[] args)
         {
-            const int isPresent = 1;
-            const int isPartTime = 2;
-            const int empRatePerHour = 20;
-            int empHour = 0, empWage = 0, i, totalWage = 0; 
+            const int IS_FULL_TIME = 1;
+            const int IS_PART_TIME = 2;
+            const int IS_MAX_WORKING_DAY = 20;
+            const int IS_MAX_WORKING_HRS = 50;
+            const int IS_EMP_RATE_PER_HR = 20;
+            int empHour = 0, empWage = 0, day = 1, totalWage = 0, totalHours = 0;
             Console.WriteLine("Welcome to Employee Wage Computation");
 
-            Console.WriteLine("Enter the number of days: ");
-            int number = Convert.ToInt32(Console.ReadLine());
+            //UC6-Employee wage 20 days and 50 hours
 
-            //UC2-Employee daily Wage
-            //Random random = new Random();
-            //int empAttendence = random.Next(0, 2);
-            for (i = 1; i <= number; i++)
+            while (day <= IS_MAX_WORKING_DAY && totalHours <= IS_MAX_WORKING_HRS)
+
             {
                 Random random = new Random();
                 int empAttendence = random.Next(0, 3);
+                switch (empAttendence)
+                {
+                    case IS_FULL_TIME:
+                        Console.WriteLine("\nEmployee is Present");
+                        empHour = 8;
+                        break;
 
-                if (empAttendence == isPresent)
-                {
-                    Console.WriteLine("\nEmployee is Present");
-                    empHour = 8;
+                    case IS_PART_TIME:
+                        Console.WriteLine("\nEmployee is Present for Half day");
+                        empHour = 4;
+                        break;
+
+                    default:
+                        Console.WriteLine("\nEmployee is Absent");
+                        empHour = 0;
+                        break;
                 }
-                else if (empAttendence == isPartTime)
-                {
-                    Console.WriteLine("\nEmployee is Present for Half day");
-                    empHour = 4;
-                }
-                else
-                {
-                    Console.WriteLine("\nEmployee is Absent");
-                    empHour = 0;
-                }
-                empWage = empHour * empRatePerHour;
-                Console.WriteLine($"Employee Wage day {i}: " + empWage);
+                empWage = empHour * IS_EMP_RATE_PER_HR;
+                Console.WriteLine("day{0} Employee Wage: {1} EmpHours {2}", day, empWage, empHour);
                 totalWage += empWage;
+                day++;
+                totalHours += empHour;
             }
-
-            Console.WriteLine($"Total Employee Wage till day {number} is: " + totalWage);
+            Console.WriteLine("Total Employee wage for {0} days: {1} TotalHours: {2}", (day - 1), totalWage, totalHours);
             Console.ReadLine();
         }
     }
