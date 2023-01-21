@@ -13,13 +13,14 @@ namespace EmployeeWageCompute
             const int IS_FULL_TIME = 1;
             const int IS_PART_TIME = 2;
             const int IS_MAX_WORKING_DAY = 20;
+            const int IS_MAX_WORKING_HRS = 50;
             const int IS_EMP_RATE_PER_HR = 20;
-            int empHour = 0, empWage=0, day, totalWage=0;
+            int empHour = 0, empWage=0, day=1, totalWage=0, totalHours=0;
             Console.WriteLine("Welcome to Employee Wage Computation");
 
             //UC4-Employee wage 20 days
             
-            for (day = 1; day <= IS_MAX_WORKING_DAY; day++)
+            while (day <= IS_MAX_WORKING_DAY && totalHours <= IS_MAX_WORKING_HRS)
 
             {
                 Random random = new Random();
@@ -42,11 +43,14 @@ namespace EmployeeWageCompute
                         break;
                 }
                 empWage = empHour * IS_EMP_RATE_PER_HR;
+                //totalHours += empHour;
                 //Console.WriteLine("Employee Wage: " + empWage);
-                Console.WriteLine("day{0} Employee Wage: {1}" ,day, empWage);
+                Console.WriteLine("day{0} Employee Wage: {1} EmpHours {2}" ,day, empWage, empHour);
                 totalWage += empWage;
+                day++;
+                totalHours += empHour;
             }
-            Console.WriteLine("Total Employee wage for {0} days: {1}", (day - 1), totalWage);
+            Console.WriteLine("Total Employee wage for {0} days: {1} TotalHours: {2}", (day - 1), totalWage, totalHours);
             Console.ReadLine();
         }
     }
