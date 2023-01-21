@@ -15,11 +15,11 @@ namespace EmployeeWageCompute
             const int IS_MAX_WORKING_DAY = 20;
             const int IS_MAX_WORKING_HRS = 50;
             const int IS_EMP_RATE_PER_HR = 20;
-            int empHour = 0, empWage=0, day=1, totalWage=0, totalHours=0;
+            int empHour = 0, empWage = 0, day = 1, totalWage = 0, totalHours = 0;
             Console.WriteLine("Welcome to Employee Wage Computation");
 
-            //UC4-Employee wage 20 days
-            
+            //UC6-Employee wage 20 days and 50 hours
+
             while (day <= IS_MAX_WORKING_DAY && totalHours <= IS_MAX_WORKING_HRS)
 
             {
@@ -43,9 +43,7 @@ namespace EmployeeWageCompute
                         break;
                 }
                 empWage = empHour * IS_EMP_RATE_PER_HR;
-                //totalHours += empHour;
-                //Console.WriteLine("Employee Wage: " + empWage);
-                Console.WriteLine("day{0} Employee Wage: {1} EmpHours {2}" ,day, empWage, empHour);
+                Console.WriteLine("day{0} Employee Wage: {1} EmpHours {2}", day, empWage, empHour);
                 totalWage += empWage;
                 day++;
                 totalHours += empHour;
