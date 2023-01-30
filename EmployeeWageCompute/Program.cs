@@ -10,6 +10,12 @@ namespace EmployeeWageCompute
     {
         private static void Main(string[] args)
         {
+            ConputeEmpWage();
+            Console.ReadLine();
+        }
+
+        public static void ConputeEmpWage()
+        {
             const int IS_FULL_TIME = 1;
             const int IS_PART_TIME = 2;
             const int IS_MAX_WORKING_DAY = 20;
@@ -49,7 +55,6 @@ namespace EmployeeWageCompute
                 totalHours += empHour;
             }
             Console.WriteLine("Total Employee wage for {0} days: {1} TotalHours: {2}", (day - 1), totalWage, totalHours);
-            Console.ReadLine();
         }
     }
 }
