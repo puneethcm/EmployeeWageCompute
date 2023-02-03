@@ -8,25 +8,24 @@ namespace EmployeeWageCompute
 {
     internal class Program
     {
+        public const int IS_FULL_TIME = 1;
+        public const int IS_PART_TIME = 2;
+
         private static void Main(string[] args)
         {
-            ConputeEmpWage();
+            ConputeEmpWage("Deloitee",25,50,30);
+            ConputeEmpWage("Google", 30, 70, 20);
             Console.ReadLine();
         }
 
-        public static void ConputeEmpWage()
+        public static void ConputeEmpWage(string company, int maxWorkingDays, int maxWorkingHours, int empRatePerHour)
         {
-            const int IS_FULL_TIME = 1;
-            const int IS_PART_TIME = 2;
-            const int IS_MAX_WORKING_DAY = 20;
-            const int IS_MAX_WORKING_HRS = 50;
-            const int IS_EMP_RATE_PER_HR = 20;
             int empHour = 0, empWage = 0, day = 1, totalWage = 0, totalHours = 0;
-            Console.WriteLine("Welcome to Employee Wage Computation");
+            Console.WriteLine("\nWelcome to Employee Wage Computation");
 
             //UC6-Employee wage 20 days and 50 hours
 
-            while (day <= IS_MAX_WORKING_DAY && totalHours <= IS_MAX_WORKING_HRS)
+            while (day <= maxWorkingDays && totalHours <= maxWorkingHours)
 
             {
                 Random random = new Random();
@@ -48,13 +47,13 @@ namespace EmployeeWageCompute
                         empHour = 0;
                         break;
                 }
-                empWage = empHour * IS_EMP_RATE_PER_HR;
-                Console.WriteLine("day{0} Employee Wage: {1} EmpHours {2}", day, empWage, empHour);
+                empWage = empHour * empRatePerHour;
+                Console.WriteLine("\nday{0} Employee Wage: {1} EmpHours {2}", day, empWage, empHour);
                 totalWage += empWage;
                 day++;
                 totalHours += empHour;
             }
-            Console.WriteLine("Total Employee wage for {0} days: {1} TotalHours: {2}", (day - 1), totalWage, totalHours);
+            Console.WriteLine("\nTotal Employee wage of company {3} for {0} days: {1} TotalHours: {2}", (day - 1), totalWage, totalHours, company);
         }
     }
 }
