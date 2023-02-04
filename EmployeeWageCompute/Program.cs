@@ -12,35 +12,47 @@ namespace EmployeeWageCompute
         {
             public const int IS_FULL_TIME = 1;
             public const int IS_PART_TIME = 2;
-            public string company;
-            public int maxWorkingDays, maxWorkingHours, empRatePerHour;
-
-            public EmpWageBuilder(string company, int maxWorkingDays, int maxWorkingHours, int empRatePerHour)
+            CompanyDetails[] companies;
+            int numofcompany = 0;
+            public EmpWageBuilder()
             {
-                this.company = company;
-                this.maxWorkingDays = maxWorkingDays;
-                this.maxWorkingHours = maxWorkingHours;
-                this.empRatePerHour = empRatePerHour;
+                companies = new CompanyDetails[3];
+            }
+
+            public void AddCompanyDetails(string company, int maxWorkingDays, int maxWorkingHours, int empRatePerHour)
+            {
+                CompanyDetails conpanyDetails = new CompanyDetails(company, maxWorkingDays, maxWorkingHours, empRatePerHour);
+                companies[numofcompany] = conpanyDetails;
+                numofcompany++;
+            }
+
+            public void IterateOverCompanies()
+            {
+                for(int i = 0; i < companies.Length; i++)
+                {
+                    int totalWage = ConputeEmpWage(companies[i]);
+                    companies[i].SetTotalWage(totalWage);
+                    Console.WriteLine(companies[i]);
+                }
             }
             static void Main(string[] args)
             {
                 Console.WriteLine("\nWelcome to Employee Wage Computation");
-                EmpWageBuilder deloitte = new EmpWageBuilder("Deloitte", 25, 50, 30);
-                deloitte.ConputeEmpWage();
-                EmpWageBuilder bridge = new EmpWageBuilder("Bridge", 30, 70, 20);
-                bridge.ConputeEmpWage();
-                EmpWageBuilder google = new EmpWageBuilder("Google", 20, 60, 35);
-                google.ConputeEmpWage();
+                EmpWageBuilder builder = new EmpWageBuilder();
+                builder.AddCompanyDetails("Deloitee", 25, 50, 30);
+                builder.AddCompanyDetails("Bridge", 25, 50, 30);
+                builder.AddCompanyDetails("Google", 25, 50, 30);
+                builder.IterateOverCompanies();
                 Console.ReadLine();
             }
 
-            public void ConputeEmpWage()
+            public int ConputeEmpWage(CompanyDetails details)
             {
                 int empHour = 0, empWage = 0, day = 1, totalWage = 0, totalHours = 0;
 
                 //UC6-Employee wage 20 days and 50 hours
 
-                while (day <= maxWorkingDays && totalHours <= maxWorkingHours)
+                while (day <= details.maxWorkingDays && totalHours <= details.maxWorkingHours)
 
                 {
                     Random random = new Random();
@@ -62,13 +74,14 @@ namespace EmployeeWageCompute
                             empHour = 0;
                             break;
                     }
-                    empWage = empHour * empRatePerHour;
+                    empWage = empHour * details.empRatePerHour;
                     //Console.WriteLine("\nday{0} Employee Wage: {1} EmpHours {2}", day, empWage, empHour);
                     totalWage += empWage;
                     day++;
                     totalHours += empHour;
                 }
-                Console.WriteLine("\nTotal Employee wage of company {3} for {0} days is {1} and TotalHours: {2}", (day - 1), totalWage, totalHours, company);
+                Console.WriteLine("\nTotal Employee wage of company {3} for {0} days is {1} and TotalHours: {2}", (day - 1), totalWage, totalHours,details.company);
+                return totalWage;
             }
         }
     }
