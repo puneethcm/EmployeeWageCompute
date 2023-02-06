@@ -4,7 +4,7 @@ namespace EmployeeWageCompute
 	public class CompanyDetails
 	{
 		public string company;
-        public int maxWorkingDays, maxWorkingHours, empRatePerHour, totalWage;
+        public int maxWorkingDays, maxWorkingHours, empRatePerHour, totalWage,empWage;
 
 		public CompanyDetails(string company, int maxWorkingDays, int maxWorkingHours, int empRatePerHour)
 		{
@@ -21,7 +21,7 @@ namespace EmployeeWageCompute
 
         public override string ToString()
         {
-            return $"Company:{company} totalWage:{totalWage}";
+            return $"\nCompany:{company} totalWage:{totalWage}";
         }
     }
 }

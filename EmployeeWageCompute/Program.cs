@@ -12,28 +12,37 @@ namespace EmployeeWageCompute
         {
             public const int IS_FULL_TIME = 1;
             public const int IS_PART_TIME = 2;
-            CompanyDetails[] companies;
+
+            List<CompanyDetails> list;
+            Dictionary<string, CompanyDetails> KeyValues;
             int numofcompany = 0;
             public EmpWageBuilder()
             {
-                companies = new CompanyDetails[3];
+                //companies = new CompanyDetails[3];
+                list = new List<CompanyDetails>();
+                KeyValues = new Dictionary<string, CompanyDetails>();
             }
 
             public void AddCompanyDetails(string company, int maxWorkingDays, int maxWorkingHours, int empRatePerHour)
             {
                 CompanyDetails conpanyDetails = new CompanyDetails(company, maxWorkingDays, maxWorkingHours, empRatePerHour);
-                companies[numofcompany] = conpanyDetails;
-                numofcompany++;
+                
+                list.Add(conpanyDetails);
+                KeyValues.Add(company,conpanyDetails);
             }
 
             public void IterateOverCompanies()
             {
-                for(int i = 0; i < companies.Length; i++)
+                for(int i = 0; i < list.Count; i++)
                 {
-                    int totalWage = ConputeEmpWage(companies[i]);
-                    companies[i].SetTotalWage(totalWage);
-                    Console.WriteLine(companies[i]);
+                    int totalWage = ConputeEmpWage(list[i]);
+                    list[i].SetTotalWage(totalWage);
+                    Console.WriteLine(list[i]);
                 }
+            }
+            public void GetTotalWageOnCompany(string comp)
+            {
+                Console.WriteLine("\nTotalWage for {0} is {1}",comp, KeyValues[comp].totalWage);
             }
             static void Main(string[] args)
             {
@@ -43,6 +52,7 @@ namespace EmployeeWageCompute
                 builder.AddCompanyDetails("Bridge", 25, 50, 30);
                 builder.AddCompanyDetails("Google", 25, 50, 30);
                 builder.IterateOverCompanies();
+                builder.GetTotalWageOnCompany("Bridge");
                 Console.ReadLine();
             }
 
@@ -80,7 +90,7 @@ namespace EmployeeWageCompute
                     day++;
                     totalHours += empHour;
                 }
-                Console.WriteLine("\nTotal Employee wage of company {3} for {0} days is {1} and TotalHours: {2}", (day - 1), totalWage, totalHours,details.company);
+                //Console.WriteLine("\nTotal Employee wage of company {3} for {0} days is {1} and TotalHours: {2}", (day - 1), totalWage, totalHours, details.company);
                 return totalWage;
             }
         }
